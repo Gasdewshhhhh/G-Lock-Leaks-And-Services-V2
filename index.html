@@ -8,15 +8,21 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg-black text-white min-h-screen p-6">
-    <header class="text-center text-4xl font-bold mb-6 text-red-600">G-Lock Leaks & Services</header>
 
-    <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="content"></main>
+    <!-- Hero Section -->
+    <section class="text-center mb-10">
+        <h1 class="text-4xl font-bold text-red-600 mb-4">G-Lock Leaks & Services</h1>
+        <div class="flex justify-center space-x-4">
+            <button onclick="scrollToLeaks()" class="bg-white text-black px-6 py-2 rounded-xl hover:bg-gray-300 transition">Browse Leaks</button>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition">Join Discord</a>
+            <button onclick="promptAdmin()" class="bg-black text-white px-6 py-2 rounded-xl hover:bg-gray-800 transition">Thanks</button>
+        </div>
+    </section>
 
-    <div class="fixed bottom-4 right-4 space-x-2">
-        <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition">Join Discord</a>
-        <button onclick="promptAdmin()" class="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition">Admin</button>
-    </div>
+    <!-- Leaks Grid -->
+    <main id="content" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></main>
 
+    <!-- Admin Panel -->
     <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
         <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
         <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
