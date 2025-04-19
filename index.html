@@ -24,20 +24,6 @@
         <button onclick="addCard()" class="bg-green-600 w-full p-2 rounded hover:bg-green-700">Add Card</button>
     </div>
 
-    <!-- Admin Password Prompt -->
-    <script>
-        function promptAdmin() {
-            const password = "GasOnly";
-            const userInput = prompt("Enter admin password:");
-            if (userInput === password) {
-                document.getElementById('adminForm').classList.remove('hidden');
-            } else {
-                alert("Incorrect password");
-            }
-        }
-    </script>
-
-    <!-- Supabase + Add Card Logic -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
