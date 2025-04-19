@@ -9,20 +9,23 @@
 </head>
 <body class="bg-black text-white min-h-screen">
 
-    <section class="flex flex-col items-center justify-center h-screen space-y-6">
-        <h1 class="text-5xl font-bold text-red-600">G-Lock Leaks & Services</h1>
-        <div class="space-x-4">
-            <button onclick="scrollToLeaks()" class="bg-white text-black px-8 py-3 text-lg font-semibold rounded-xl hover:bg-gray-300 transition">Browse Leaks</button>
-            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 text-white px-6 py-3 text-lg font-semibold rounded-xl hover:bg-blue-700 transition">Join Discord</a>
+    <!-- Intro Section -->
+    <section class="h-screen flex flex-col justify-center items-center">
+        <h1 class="text-5xl font-bold text-red-600 mb-6">G-Lock Leaks & Services</h1>
+        <div class="flex space-x-4">
+            <button onclick="scrollToLeaks()" class="bg-red-600 px-8 py-3 text-lg font-semibold rounded-xl hover:bg-red-700 transition">Browse Leaks</button>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 px-6 py-3 text-lg font-semibold rounded-xl hover:bg-blue-700 transition">Join Discord</a>
         </div>
     </section>
 
-    <div class="h-[100vh]"></div> <!-- Long scroll space -->
+    <!-- Leaks Section -->
+    <main id="leaksSection" class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div id="content"></div>
+    </main>
 
-    <main id="leaks" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 pb-24" id="content"></main>
-
+    <!-- Admin Button and Form -->
     <div class="fixed bottom-4 right-4 space-x-2">
-        <button onclick="promptAdmin()" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
+        <button onclick="promptAdmin()" class="bg-black px-3 py-2 rounded-full hover:bg-gray-800 transition text-white text-xl">.</button>
     </div>
 
     <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
