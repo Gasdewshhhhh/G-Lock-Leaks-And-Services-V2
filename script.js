@@ -1,23 +1,36 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-// Supabase setup
 const supabaseUrl = 'https://iddpdcgekjcwqzhauguz.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw'; // keep your full key
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw';
 const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Make supabase global (for console access)
 window.supabase = supabase;
 
-// Admin password
-const password = "GasOnly";
+const ADMIN_PASSWORD = "GasOnly";
 
-window.promptAdmin = function () {
-    const userInput = prompt("Enter admin password:");
-    if (userInput === password) {
-        document.getElementById('adminForm').classList.remove("hidden");
+function checkLogin() {
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+        document.getElementById("adminForm").classList.remove("hidden");
+        document.getElementById("loginModal").classList.add("hidden");
+        document.getElementById("logoutBtn").classList.remove("hidden");
+    }
+}
+
+window.handleLogin = function () {
+    const inputPassword = document.getElementById("loginPassword").value;
+    if (inputPassword === ADMIN_PASSWORD) {
+        sessionStorage.setItem("isLoggedIn", "true");
+        checkLogin();
     } else {
         alert("Incorrect password");
     }
+};
+
+window.logout = function () {
+    sessionStorage.removeItem("isLoggedIn");
+    document.getElementById("adminForm").classList.add("hidden");
+    document.getElementById("loginModal").classList.remove("hidden");
+    document.getElementById("logoutBtn").classList.add("hidden");
 };
 
 window.addCard = async function () {
@@ -64,4 +77,5 @@ async function loadCards() {
     leaks.forEach(renderCard);
 }
 
+checkLogin();
 loadCards();
