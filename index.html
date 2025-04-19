@@ -10,14 +10,16 @@
 <body class="bg-black text-white min-h-screen p-6">
     <header class="text-center text-4xl font-bold mb-6 text-red-600">G-Lock Leaks & Services</header>
 
+    <!-- Cards Grid -->
     <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="content"></main>
 
+    <!-- Discord Button -->
     <div class="fixed bottom-4 right-4 space-x-2">
         <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition">Join Discord</a>
-        <button onclick="logout()" id="logoutBtn" class="hidden bg-gray-700 px-4 py-2 rounded-xl hover:bg-gray-600 transition">Logout</button>
     </div>
 
-    <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
+    <!-- Admin Form (Initially Hidden) -->
+    <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden z-40">
         <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
         <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
         <input type="text" id="linkUrl" placeholder="Link URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
@@ -25,14 +27,22 @@
     </div>
 
     <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-        <div class="bg-gray-900 p-6 rounded-xl shadow-xl text-center">
-            <h2 class="text-2xl mb-4 text-red-400">Admin Login</h2>
-            <input type="password" id="loginPassword" placeholder="Enter Password" class="w-full mb-4 p-2 rounded bg-gray-700 text-white">
-            <button onclick="handleLogin()" class="bg-red-600 px-6 py-2 rounded hover:bg-red-700">Login</button>
-        </div>
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <form id="loginForm" class="bg-gray-900 p-6 rounded-lg w-80">
+            <h2 class="text-white text-xl font-bold mb-4">Admin Login</h2>
+            <input type="email" id="emailInput" placeholder="Email" required class="w-full mb-2 p-2 rounded bg-gray-700 text-white" />
+            <input type="password" id="passwordInput" placeholder="Password" required class="w-full mb-4 p-2 rounded bg-gray-700 text-white" />
+            <button type="submit" class="bg-red-600 w-full p-2 rounded hover:bg-red-700">Login</button>
+        </form>
     </div>
 
+    <!-- Hidden Admin Button -->
+    <button id="adminBtn" onclick="promptAdmin()" class="hidden fixed bottom-4 left-4 bg-red-600 px-4 py-2 rounded-xl hover:bg-red-700 transition">Open Admin</button>
+
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="hidden fixed top-4 right-4 bg-gray-800 px-4 py-2 rounded-xl hover:bg-gray-700 transition">Logout</button>
+
+    <!-- Supabase + Auth + Admin Logic -->
     <script type="module" src="script.js"></script>
 </body>
 </html>
