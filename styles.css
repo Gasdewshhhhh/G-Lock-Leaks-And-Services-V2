@@ -14,15 +14,10 @@
     }
 }
 
-.card {
-    background-color: #7f1d1d; /* Deep red */
-    color: white; /* Default text color */
+.card:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
 }
-
-    .card:hover {
-        transform: scale(1.03);
-        transition: transform 0.2s ease-in-out;
-    }
 
 /* Admin Form */
 #adminForm {
