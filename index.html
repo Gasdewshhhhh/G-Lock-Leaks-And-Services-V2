@@ -7,22 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-black text-white min-h-screen p-6">
+<body class="bg-black text-white min-h-screen">
 
-    <!-- Hero Section -->
-    <section class="text-center mb-10">
-        <h1 class="text-4xl font-bold text-red-600 mb-4">G-Lock Leaks & Services</h1>
-        <div class="flex justify-center space-x-4">
-            <button onclick="scrollToLeaks()" class="bg-white text-black px-6 py-2 rounded-xl hover:bg-gray-300 transition">Browse Leaks</button>
-            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition">Join Discord</a>
-            <button onclick="promptAdmin()" class="bg-black text-white px-6 py-2 rounded-xl hover:bg-gray-800 transition">Thanks</button>
+    <section class="flex flex-col items-center justify-center h-screen space-y-6">
+        <h1 class="text-5xl font-bold text-red-600">G-Lock Leaks & Services</h1>
+        <div class="space-x-4">
+            <button onclick="scrollToLeaks()" class="bg-white text-black px-8 py-3 text-lg font-semibold rounded-xl hover:bg-gray-300 transition">Browse Leaks</button>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 text-white px-6 py-3 text-lg font-semibold rounded-xl hover:bg-blue-700 transition">Join Discord</a>
         </div>
     </section>
 
-    <!-- Leaks Grid -->
-    <main id="content" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></main>
+    <div class="h-[100vh]"></div> <!-- Long scroll space -->
 
-    <!-- Admin Panel -->
+    <main id="leaks" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6 pb-24" id="content"></main>
+
+    <div class="fixed bottom-4 right-4 space-x-2">
+        <button onclick="promptAdmin()" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
+    </div>
+
     <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
         <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
         <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">

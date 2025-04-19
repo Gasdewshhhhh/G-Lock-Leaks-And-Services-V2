@@ -1,9 +1,18 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
+// Supabase setup
 const supabaseUrl = 'https://iddpdcgekjcwqzhauguz.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw'; // keep your full key
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Make supabase global for debugging
 window.supabase = supabase;
+
+// Scroll to leaks section
+window.scrollToLeaks = function () {
+    const leaksSection = document.getElementById("leaks");
+    leaksSection.scrollIntoView({ behavior: "smooth" });
+};
 
 // Admin password
 const password = "GasOnly";
@@ -27,7 +36,7 @@ window.addCard = async function () {
         return;
     }
 
-    const { error } = await supabase.from('leaks').insert([
+    const { data, error } = await supabase.from('leaks').insert([
         { name, image_url: imgUrl, link_url: linkUrl }
     ]);
 
@@ -47,9 +56,9 @@ function renderCard(leak) {
     card.innerHTML = `
     <h2 class="text-xl font-semibold text-white mb-2">${leak.name}</h2>
     <img src="${leak.image_url}" alt="${leak.name}" class="rounded-lg mb-4 w-full h-48 object-cover" />
-    <a href="${leak.link_url}" target="_blank" class="block text-center text-red-500 hover:underline">Visit Script</a>
+    <a href="${leak.link_url}" target="_blank" class="block text-center text-red-400 hover:underline">Visit Script</a>
   `;
-    document.getElementById("content").appendChild(card);
+    document.getElementById("leaks").appendChild(card);
 }
 
 async function loadCards() {
@@ -60,9 +69,5 @@ async function loadCards() {
     }
     leaks.forEach(renderCard);
 }
-
-window.scrollToLeaks = function () {
-    document.getElementById("content").scrollIntoView({ behavior: "smooth" });
-};
 
 loadCards();
