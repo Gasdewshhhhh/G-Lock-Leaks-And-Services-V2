@@ -1,16 +1,18 @@
 body {
-    background-color: black;
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
     color: white;
 }
 
+/* Card styles */
 .card {
-    background-color: #1a1a1a;
-    padding: 1rem;
-    border-radius: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 2px solid #ff0000;
     position: relative;
+    background-color: #1f1f1f;
+    padding: 1rem;
+    border-radius: 0.75rem;
     overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 2px solid red; /* Red border around card */
 }
 
     .card img {
@@ -21,41 +23,38 @@ body {
         transform: scale(1.05);
     }
 
-    .card:hover {
-        box-shadow: 0 0 15px red, 0 0 25px red, 0 0 40px red;
-    }
-
+    /* Neon tracer glow on hover */
     .card::before {
-        content: '';
+        content: "";
         position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        border: 2px solid transparent;
-        border-radius: 1rem;
-        animation: neon-border 2s linear infinite;
-        pointer-events: none;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        background: linear-gradient(270deg, red, #ff00ff, cyan, red);
+        background-size: 600% 600%;
+        z-index: -1;
+        filter: blur(8px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: inherit;
+        animation: neonTracer 5s linear infinite;
     }
 
-@keyframes neon-border {
+    .card:hover::before {
+        opacity: 1;
+    }
+
+@keyframes neonTracer {
     0% {
-        border-color: transparent transparent transparent red;
-    }
-
-    25% {
-        border-color: transparent transparent red transparent;
+        background-position: 0% 50%;
     }
 
     50% {
-        border-color: transparent red transparent transparent;
-    }
-
-    75% {
-        border-color: red transparent transparent transparent;
+        background-position: 100% 50%;
     }
 
     100% {
-        border-color: transparent transparent transparent red;
+        background-position: 0% 50%;
     }
 }
