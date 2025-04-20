@@ -1,3 +1,14 @@
+/* Particle Canvas */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
 /* Title Glitch */
 .glitch-title {
     font-family: 'Orbitron', sans-serif;
@@ -18,18 +29,18 @@
         color: #ff1e56;
         overflow: hidden;
         z-index: -1;
+        animation: glitch 1s infinite linear alternate-reverse, glitchSkew 0.5s infinite;
+        pointer-events: none;
     }
 
     .glitch-title::before {
         left: 2px;
         text-shadow: -2px 0 red;
-        animation: glitch 1s infinite linear alternate-reverse;
     }
 
     .glitch-title::after {
         left: -2px;
         text-shadow: -2px 0 blue;
-        animation: glitch 1s infinite linear alternate-reverse;
     }
 
 @keyframes glitch {
@@ -43,6 +54,32 @@
 
     100% {
         clip: rect(0, 9999px, 0, 0);
+    }
+}
+
+@keyframes glitchSkew {
+    0% {
+        transform: skew(0deg);
+    }
+
+    10% {
+        transform: skew(5deg);
+    }
+
+    20% {
+        transform: skew(-5deg);
+    }
+
+    30% {
+        transform: skew(3deg);
+    }
+
+    40% {
+        transform: skew(-3deg);
+    }
+
+    100% {
+        transform: skew(0deg);
     }
 }
 
@@ -64,7 +101,32 @@
         box-shadow: 0 0 12px #ff1e56, 0 0 20px #ff1e56;
     }
 
-/* Card Hover Red Tracer */
+/* Neon Underline Link (optional) */
+.glow-link {
+    position: relative;
+    color: #ff1e56;
+    text-decoration: none;
+}
+
+    .glow-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #ff1e56;
+        box-shadow: 0 0 6px #ff1e56;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .glow-link:hover::after {
+        transform: scaleX(1);
+    }
+
+/* Card Hover Red Tracer + Zoom */
 .card {
     position: relative;
     overflow: hidden;
@@ -75,6 +137,10 @@
     z-index: 0;
     border: 2px solid #1ec7ff;
 }
+
+    .card:hover {
+        transform: scale(1.03);
+    }
 
     .card::before {
         content: "";
