@@ -14,46 +14,9 @@
     }
 }
 
-.card {
-    background-color: #1f1f1f;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
-    border: 2px solid transparent;
-    position: relative;
-}
-
-    .card:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-        border: 2px solid rgba(255, 0, 0, 0.8);
-    }
-
-    .card::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border-radius: 0.75rem;
-        padding: 2px;
-        background: linear-gradient(45deg, red, #ff1e56, #ffac41, red);
-        background-size: 400% 400%;
-        animation: glowBorder 6s linear infinite;
-        z-index: -1;
-    }
-
-@keyframes glowBorder {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+.card:hover {
+    transform: scale(1.03);
+    transition: transform 0.2s ease-in-out;
 }
 
 .card img {
@@ -64,7 +27,26 @@
     transform: scale(1.05);
 }
 
-/* Admin Form */
+/* Glowing animated border */
+@keyframes glowBorder {
+    0% {
+        box-shadow: 0 0 5px #ff0000;
+    }
+
+    50% {
+        box-shadow: 0 0 15px #ff0000, 0 0 25px #ff0000;
+    }
+
+    100% {
+        box-shadow: 0 0 5px #ff0000;
+    }
+}
+
+.animate-glow {
+    animation: glowBorder 2s infinite ease-in-out;
+}
+
+/* Admin form styling */
 #adminForm {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }

@@ -2,21 +2,20 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // Supabase setup
 const supabaseUrl = 'https://iddpdcgekjcwqzhauguz.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw'; // Your actual public anon key
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw'; // Your actual key
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Make supabase global for debugging
+// Global for debug
 window.supabase = supabase;
 
-// Admin password
 const password = "GasOnly";
 
 window.promptAdmin = function () {
-    const userInput = prompt("Enter admin password:");
-    if (userInput === password) {
+    const input = prompt("Enter admin password:");
+    if (input === password) {
         document.getElementById('adminForm').classList.remove("hidden");
     } else {
-        alert("Incorrect password");
+        alert("Incorrect password.");
     }
 };
 
@@ -26,17 +25,14 @@ window.addCard = async function () {
     const linkUrl = document.getElementById("linkUrl").value;
 
     if (!name || !imgUrl || !linkUrl) {
-        alert("Please fill in all fields");
+        alert("Please fill in all fields.");
         return;
     }
 
-    const { data, error } = await supabase.from('leaks').insert([
-        { name, image_url: imgUrl, link_url: linkUrl }
-    ]);
-
+    const { error } = await supabase.from('leaks').insert([{ name, image_url: imgUrl, link_url: linkUrl }]);
     if (error) {
-        console.error("Error inserting:", error);
-        alert("Failed to add card.");
+        console.error(error);
+        alert("Error adding card.");
         return;
     }
 
@@ -46,7 +42,7 @@ window.addCard = async function () {
 
 function renderCard(leak) {
     const card = document.createElement("div");
-    card.className = "card card-added";
+    card.className = "card bg-red-900 p-4 rounded-xl shadow-lg card-added transition-transform transform hover:scale-105 border-2 border-red-500 animate-glow";
     card.innerHTML = `
         <h2 class="text-xl font-semibold text-white mb-2">${leak.name}</h2>
         <img src="${leak.image_url}" alt="${leak.name}" class="rounded-lg mb-4 w-full h-48 object-cover" />
@@ -63,5 +59,10 @@ async function loadCards() {
     }
     leaks.forEach(renderCard);
 }
+
+function scrollToLeaks() {
+    document.getElementById('leaks').scrollIntoView({ behavior: 'smooth' });
+}
+window.scrollToLeaks = scrollToLeaks;
 
 loadCards();
