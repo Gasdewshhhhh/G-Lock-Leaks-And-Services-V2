@@ -1,38 +1,45 @@
+
+/* Card base */
 .card {
-    position: relative;
-    transition: transform 0.3s ease;
+  position: relative;
+  border: 2px solid red;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-    .card:hover img {
-        transform: scale(1.05);
-    }
+/* Image hover zoom */
+.card:hover img {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
 
-    .card .neon-border {
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        border: 2px solid transparent;
-        border-radius: 0.75rem;
-        pointer-events: none;
-    }
+/* Neon tracer effect */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid red;
+  border-radius: 0.75rem;
+  pointer-events: none;
+  z-index: 1;
+  animation: tracer 2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-    .card:hover .neon-border {
-        border-color: red;
-        animation: neonTracer 2s linear infinite;
-    }
+.card:hover::before {
+  opacity: 1;
+}
 
-@keyframes neonTracer {
-    0% {
-        box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
-    }
-
-    50% {
-        box-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red;
-    }
-
-    100% {
-        box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
-    }
+@keyframes tracer {
+  0% {
+    box-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red;
+  }
+  50% {
+    box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+  }
+  100% {
+    box-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red;
+  }
 }
