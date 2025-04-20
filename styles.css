@@ -5,7 +5,6 @@
     color: #ff1e56;
     font-weight: bold;
     text-transform: uppercase;
-    font-family: 'Orbitron', sans-serif;
     letter-spacing: 2px;
 }
 
@@ -54,51 +53,27 @@
     }
 }
 
-/* Neon Buttons */
-.button-glow {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: #ff1e56;
-    color: white;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    box-shadow: 0 0 8px #ff1e56;
-    transition: all 0.3s ease;
-}
-
-    .button-glow:hover {
-        background: #ff005a;
-        box-shadow: 0 0 12px #ff1e56, 0 0 20px #ff1e56;
-    }
-
-/* Leak Card Styles with Neon Tracer on Hover */
+/* Card Tracer Border */
 .card {
     position: relative;
     overflow: hidden;
     border: 2px solid #ff1e56;
-    transition: transform 0.3s ease;
-    border-radius: 0.5rem;
-    background: #1a1a1a;
+    transition: transform 0.3s ease-in-out;
 }
-
-    .card:hover {
-        transform: scale(1.02);
-    }
 
     .card::before {
         content: "";
         position: absolute;
         inset: 0;
         border: 2px solid transparent;
+        border-radius: inherit;
+        animation: tracer 1.5s linear infinite;
         pointer-events: none;
-        transition: border 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover::before {
         border-color: #ff1e56;
         box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
-        animation: tracer 1.5s linear infinite;
     }
 
 @keyframes tracer {
