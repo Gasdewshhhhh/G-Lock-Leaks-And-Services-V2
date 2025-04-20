@@ -1,64 +1,79 @@
-/* Glitch Title Effect */
+/* Title Glitch */
 .glitch-title {
-    position: relative;
+    font-family: 'Orbitron', sans-serif;
     font-size: 3rem;
+    position: relative;
     color: #ff1e56;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 2px;
 }
 
     .glitch-title::before,
     .glitch-title::after {
         content: attr(data-text);
         position: absolute;
+        top: 0;
         left: 0;
         width: 100%;
         color: #ff1e56;
         overflow: hidden;
-        clip: rect(0, 900px, 0, 0);
+        z-index: -1;
     }
 
     .glitch-title::before {
-        color: #ff005a;
-        animation: glitchTop 2s infinite linear alternate-reverse;
+        left: 2px;
+        text-shadow: -2px 0 red;
+        animation: glitch 1s infinite linear alternate-reverse;
     }
 
     .glitch-title::after {
-        color: #ff80aa;
-        animation: glitchBottom 2s infinite linear alternate-reverse;
+        left: -2px;
+        text-shadow: -2px 0 blue;
+        animation: glitch 1s infinite linear alternate-reverse;
     }
 
-@keyframes glitchTop {
+@keyframes glitch {
     0% {
         clip: rect(0, 9999px, 0, 0);
-        transform: translate(-2px, -2px);
+    }
+
+    5% {
+        clip: rect(0, 9999px, 100%, 0);
     }
 
     100% {
-        clip: rect(0, 9999px, 30px, 0);
-        transform: translate(2px, 2px);
+        clip: rect(0, 9999px, 0, 0);
     }
 }
 
-@keyframes glitchBottom {
-    0% {
-        clip: rect(10px, 9999px, 40px, 0);
-        transform: translate(2px, -2px);
-    }
-
-    100% {
-        clip: rect(5px, 9999px, 60px, 0);
-        transform: translate(-2px, 2px);
-    }
+/* Neon Buttons */
+.button-glow {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #ff1e56;
+    color: white;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 0 8px #ff1e56;
+    transition: all 0.3s ease;
 }
 
-/* Card Tracer Border */
+    .button-glow:hover {
+        background: #ff005a;
+        box-shadow: 0 0 12px #ff1e56, 0 0 20px #ff1e56;
+    }
+
+/* Card Hover Red Tracer */
 .card {
     position: relative;
     overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #1a1a1a;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    z-index: 0;
     border: 2px solid #ff1e56;
-    transition: transform 0.3s ease-in-out;
 }
 
     .card::before {
@@ -66,39 +81,35 @@
         position: absolute;
         inset: 0;
         border: 2px solid transparent;
-        border-radius: inherit;
-        animation: tracer 1.5s linear infinite;
         pointer-events: none;
+        z-index: 2;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover::before {
         border-color: #ff1e56;
+        animation: border-trace 1.2s linear forwards;
         box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
     }
 
-@keyframes tracer {
+@keyframes border-trace {
     0% {
-        transform: scaleX(0) scaleY(1);
-        transform-origin: left;
+        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
     }
 
     25% {
-        transform: scaleX(1) scaleY(1);
-        transform-origin: left;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     }
 
     50% {
-        transform: scaleX(1) scaleY(0);
-        transform-origin: top;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
     }
 
     75% {
-        transform: scaleX(1) scaleY(1);
-        transform-origin: right;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
     100% {
-        transform: scaleX(0) scaleY(1);
-        transform-origin: bottom;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 }
