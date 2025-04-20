@@ -1,104 +1,125 @@
-/* Glitch Title Effect */
-.glitch-title {
-    position: relative;
-    font-size: 3rem;
-    color: #ff1e56;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+body {
+    background-color: #0d0d0d;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
 }
 
-    .glitch-title::before,
-    .glitch-title::after {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        width: 100%;
-        color: #ff1e56;
-        overflow: hidden;
-        clip: rect(0, 900px, 0, 0);
-    }
-
-    .glitch-title::before {
-        color: #ff005a;
-        animation: glitchTop 2s infinite linear alternate-reverse;
-    }
-
-    .glitch-title::after {
-        color: #ff80aa;
-        animation: glitchBottom 2s infinite linear alternate-reverse;
-    }
-
-@keyframes glitchTop {
-    0% {
-        clip: rect(0, 9999px, 0, 0);
-        transform: translate(-2px, -2px);
-    }
-
-    100% {
-        clip: rect(0, 9999px, 30px, 0);
-        transform: translate(2px, 2px);
-    }
-}
-
-@keyframes glitchBottom {
-    0% {
-        clip: rect(10px, 9999px, 40px, 0);
-        transform: translate(2px, -2px);
-    }
-
-    100% {
-        clip: rect(5px, 9999px, 60px, 0);
-        transform: translate(-2px, 2px);
-    }
-}
-
-/* Card Tracer Border */
 .card {
     position: relative;
-    overflow: hidden;
     border: 2px solid #ff1e56;
-    transition: transform 0.3s ease-in-out;
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow: hidden;
+    background: rgba(255, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
 
     .card::before {
         content: "";
         position: absolute;
-        inset: 0;
-        border: 2px solid transparent;
-        border-radius: inherit;
-        animation: tracer 1.5s linear infinite;
-        pointer-events: none;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(270deg, #ff1e56, #ffac41, #ff1e56);
+        z-index: 0;
+        border-radius: 1rem;
+        background-size: 600% 600%;
+        animation: tracer 4s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 
     .card:hover::before {
-        border-color: #ff1e56;
-        box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
+        opacity: 1;
     }
 
+    .card > * {
+        position: relative;
+        z-index: 1;
+    }
+
+/* Tracer Animation */
 @keyframes tracer {
     0% {
-        transform: scaleX(0) scaleY(1);
-        transform-origin: left;
-    }
-
-    25% {
-        transform: scaleX(1) scaleY(1);
-        transform-origin: left;
-    }
-
-    50% {
-        transform: scaleX(1) scaleY(0);
-        transform-origin: top;
-    }
-
-    75% {
-        transform: scaleX(1) scaleY(1);
-        transform-origin: right;
+        background-position: 0% 50%;
     }
 
     100% {
-        transform: scaleX(0) scaleY(1);
-        transform-origin: bottom;
+        background-position: 100% 50%;
+    }
+}
+
+/* Glitch effect */
+.glitch {
+    position: relative;
+    color: #ff1e56;
+}
+
+    .glitch::before,
+    .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        width: 100%;
+        overflow: hidden;
+        color: #00ffff;
+        clip: rect(0, 900px, 0, 0);
+        animation: glitch 2s infinite linear alternate-reverse;
+    }
+
+    .glitch::before {
+        left: 2px;
+        text-shadow: -2px 0 #ff00c8;
+    }
+
+    .glitch::after {
+        left: -2px;
+        text-shadow: -2px 0 #00fff9;
+    }
+
+@keyframes glitch {
+    0% {
+        clip: rect(42px, 9999px, 44px, 0);
+    }
+
+    5% {
+        clip: rect(12px, 9999px, 24px, 0);
+    }
+
+    10% {
+        clip: rect(52px, 9999px, 70px, 0);
+    }
+
+    15% {
+        clip: rect(12px, 9999px, 20px, 0);
+    }
+
+    20% {
+        clip: rect(10px, 9999px, 80px, 0);
+    }
+
+    25% {
+        clip: rect(56px, 9999px, 68px, 0);
+    }
+
+    30% {
+        clip: rect(70px, 9999px, 90px, 0);
+    }
+
+    35% {
+        clip: rect(42px, 9999px, 56px, 0);
+    }
+
+    40% {
+        clip: rect(60px, 9999px, 80px, 0);
+    }
+
+    100% {
+        clip: rect(0, 9999px, 100px, 0);
     }
 }
