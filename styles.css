@@ -69,11 +69,11 @@
     position: relative;
     overflow: hidden;
     border-radius: 0.5rem;
-    background-color: #1a1a1a;
+    background-color: #a31818;
     padding: 1rem;
     transition: transform 0.3s ease;
     z-index: 0;
-    border: 2px solid #ff1e56;
+    border: 2px solid #1ec7ff;
 }
 
     .card::before {
