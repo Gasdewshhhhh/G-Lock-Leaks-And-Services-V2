@@ -13,24 +13,23 @@
     </style>
 </head>
 <body class="bg-black text-white min-h-screen p-6">
-
     <!-- Hero Section -->
     <section class="h-screen flex flex-col justify-center items-center space-y-4">
         <h1 class="text-5xl font-bold text-red-600">G-Lock Leaks & Services</h1>
         <div class="flex space-x-4">
-            <a href="#leaks" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 text-lg font-semibold rounded-xl">Browse Leaks</a>
+            <a href="#leaks" onclick="scrollToLeaks()" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-xl">Browse Leaks</a>
             <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-xl">Join Discord</a>
         </div>
     </section>
 
     <!-- Leaks Section -->
-    <section id="leaks" class="pt-12">
+    <section id="leaks" class="pt-48 pb-24">
         <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="content"></main>
     </section>
 
-    <!-- Hidden Admin Button & Form -->
-    <div class="fixed bottom-4 right-4 space-x-2">
-        <button onclick="promptAdmin()" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
+    <!-- Admin Button & Form -->
+    <div class="fixed bottom-4 right-4">
+        <button onclick="promptAdmin()" class="text-white text-2xl">.</button>
     </div>
 
     <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">

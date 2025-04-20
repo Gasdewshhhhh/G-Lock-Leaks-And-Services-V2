@@ -1,60 +1,38 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #000;
-    color: white;
-}
-
-/* Card styles */
 .card {
     position: relative;
-    background-color: #1f1f1f;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    overflow: hidden;
     transition: transform 0.3s ease;
-    border: 2px solid red; /* Red border around card */
 }
-
-    .card img {
-        transition: transform 0.3s ease;
-    }
 
     .card:hover img {
         transform: scale(1.05);
     }
 
-    /* Neon tracer glow on hover */
-    .card::before {
-        content: "";
+    .card .neon-border {
         position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
-        background: linear-gradient(270deg, red, #ff00ff, cyan, red);
-        background-size: 600% 600%;
-        z-index: -1;
-        filter: blur(8px);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: inherit;
-        animation: neonTracer 5s linear infinite;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 2px solid transparent;
+        border-radius: 0.75rem;
+        pointer-events: none;
     }
 
-    .card:hover::before {
-        opacity: 1;
+    .card:hover .neon-border {
+        border-color: red;
+        animation: neonTracer 2s linear infinite;
     }
 
 @keyframes neonTracer {
     0% {
-        background-position: 0% 50%;
+        box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
     }
 
     50% {
-        background-position: 100% 50%;
+        box-shadow: 0 0 10px red, 0 0 20px red, 0 0 40px red;
     }
 
     100% {
-        background-position: 0% 50%;
+        box-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
     }
 }
