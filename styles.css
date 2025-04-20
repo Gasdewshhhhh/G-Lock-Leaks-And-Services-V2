@@ -1,76 +1,61 @@
-/* Cyberpunk Neon Theme Colors */
-:root {
-    --neon-pink: #ff007b;
-    --neon-blue: #00aeff;
-    --neon-cyan: #00ffff;
-    --neon-purple: #9d00ff;
-    --neon-green: #39ff14;
-    --neon-yellow: #ffea00;
+body {
+    background-color: black;
+    color: white;
 }
 
-/* Neon Text Color Classes */
-.text-neon-pink {
-    color: var(--neon-pink);
+.card {
+    background-color: #1a1a1a;
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #ff0000;
+    position: relative;
+    overflow: hidden;
 }
 
-.bg-neon-blue {
-    background-color: var(--neon-blue);
-}
+    .card img {
+        transition: transform 0.3s ease;
+    }
 
-.bg-neon-cyan {
-    background-color: var(--neon-cyan);
-}
+    .card:hover img {
+        transform: scale(1.05);
+    }
 
-.bg-neon-pink {
-    background-color: var(--neon-pink);
-}
+    .card:hover {
+        box-shadow: 0 0 15px red, 0 0 25px red, 0 0 40px red;
+    }
 
-.bg-neon-purple {
-    background-color: var(--neon-purple);
-}
+    .card::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 2px solid transparent;
+        border-radius: 1rem;
+        animation: neon-border 2s linear infinite;
+        pointer-events: none;
+    }
 
-.bg-neon-green {
-    background-color: var(--neon-green);
-}
-
-/* Neon Glow Animation */
-@keyframes neon-glow {
+@keyframes neon-border {
     0% {
-        box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+        border-color: transparent transparent transparent red;
+    }
+
+    25% {
+        border-color: transparent transparent red transparent;
     }
 
     50% {
-        box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink);
+        border-color: transparent red transparent transparent;
+    }
+
+    75% {
+        border-color: red transparent transparent transparent;
     }
 
     100% {
-        box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+        border-color: transparent transparent transparent red;
     }
 }
-
-/* Card Styling */
-.card {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 2px solid var(--neon-pink);
-    border-radius: 1rem;
-    padding: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-    .card:hover {
-        transform: scale(1.05);
-        animation: neon-glow 1.5s infinite alternate;
-    }
-
-        /* Optional: Add a glowing border animation on hover */
-        .card:hover::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 1rem;
-            box-shadow: 0 0 20px var(--neon-pink);
-            z-index: -1;
-        }
