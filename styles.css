@@ -1,71 +1,11 @@
-/* General card styling */
-.card {
-    position: relative;
-    background-color: #1f1f1f;
-    border: 2px solid red;
-    padding: 1rem;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-    /* Image zoom on hover */
-    .card img {
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-        transform: scale(1.05);
-    }
-
-    /* Tracer effect */
-    .card::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px);
-        border-radius: 1rem;
-        background: linear-gradient( 120deg, red, #ff5c33, #ff0000, #ff5c33, red );
-        background-size: 300% 300%;
-        z-index: 1;
-        animation: neonTracer 2s linear infinite;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .card:hover::before {
-        opacity: 1;
-    }
-
-    /* Ensure card content is above tracer */
-    .card * {
-        position: relative;
-        z-index: 2;
-    }
-
-/* Tracer animation keyframes */
-@keyframes neonTracer {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Glitch effect for title */
+/* Glitch Title Effect */
 .glitch-title {
-    color: red;
     position: relative;
-    display: inline-block;
+    font-size: 3rem;
+    color: #ff1e56;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
     .glitch-title::before,
@@ -74,45 +14,91 @@
         position: absolute;
         left: 0;
         width: 100%;
+        color: #ff1e56;
         overflow: hidden;
-        color: #ff0000;
-        animation: glitch 2s infinite;
+        clip: rect(0, 900px, 0, 0);
     }
 
     .glitch-title::before {
-        top: -2px;
-        color: #ff1a1a;
-        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        color: #ff005a;
+        animation: glitchTop 2s infinite linear alternate-reverse;
     }
 
     .glitch-title::after {
-        top: 2px;
-        color: #ff6666;
-        clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+        color: #ff80aa;
+        animation: glitchBottom 2s infinite linear alternate-reverse;
     }
 
-@keyframes glitch {
+@keyframes glitchTop {
     0% {
-        transform: translate(0);
-    }
-
-    20% {
-        transform: translate(-2px, 2px);
-    }
-
-    40% {
+        clip: rect(0, 9999px, 0, 0);
         transform: translate(-2px, -2px);
     }
 
-    60% {
+    100% {
+        clip: rect(0, 9999px, 30px, 0);
         transform: translate(2px, 2px);
     }
+}
 
-    80% {
+@keyframes glitchBottom {
+    0% {
+        clip: rect(10px, 9999px, 40px, 0);
         transform: translate(2px, -2px);
     }
 
     100% {
-        transform: translate(0);
+        clip: rect(5px, 9999px, 60px, 0);
+        transform: translate(-2px, 2px);
+    }
+}
+
+/* Card Tracer Border */
+.card {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ff1e56;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 2px solid transparent;
+        border-radius: inherit;
+        animation: tracer 1.5s linear infinite;
+        pointer-events: none;
+    }
+
+    .card:hover::before {
+        border-color: #ff1e56;
+        box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
+    }
+
+@keyframes tracer {
+    0% {
+        transform: scaleX(0) scaleY(1);
+        transform-origin: left;
+    }
+
+    25% {
+        transform: scaleX(1) scaleY(1);
+        transform-origin: left;
+    }
+
+    50% {
+        transform: scaleX(1) scaleY(0);
+        transform-origin: top;
+    }
+
+    75% {
+        transform: scaleX(1) scaleY(1);
+        transform-origin: right;
+    }
+
+    100% {
+        transform: scaleX(0) scaleY(1);
+        transform-origin: bottom;
     }
 }
