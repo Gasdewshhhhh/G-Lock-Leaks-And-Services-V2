@@ -4,40 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>G-Lock Leaks & Services</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-        html, body {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-black text-white min-h-screen p-6">
+<body>
 
     <!-- Hero Section -->
-    <section class="h-screen flex flex-col justify-center items-center space-y-4">
-        <h1 class="glitch-title text-6xl sm:text-7xl font-extrabold text-red-500 relative z-10">G-Lock Leaks & Services</h1>
-        <div class="flex space-x-4">
-            <a href="#leaks" class="btn-neon-red">Browse Leaks</a>
-            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="btn-neon-blue">Join Discord</a>
+    <section id="hero" style="text-align: center; padding: 80px 20px;">
+        <h1 class="glitch-title">G-Lock Leaks & Services</h1>
+        <div style="margin-top: 30px;">
+            <a href="#leaks" class="button-glow">Browse Leaks</a>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="button-glow" style="margin-left: 15px;">Join Discord</a>
         </div>
     </section>
 
+    <!-- Spacer for long scroll effect -->
+    <div style="height: 600px;"></div>
+
     <!-- Leaks Section -->
-    <section id="leaks" class="pt-12">
-        <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="content"></main>
+    <section id="leaks" style="padding: 40px;">
+        <div id="content" class="grid-container"></div>
     </section>
 
-    <!-- Admin -->
-    <div class="fixed bottom-4 right-4 space-x-2">
-        <button onclick="promptAdmin()" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
+    <!-- Admin Access Button (hidden as a single dot) -->
+    <div style="text-align: center; padding-bottom: 40px;">
+        <button onclick="promptAdmin()" style="background: none; border: none; color: #333;">.</button>
     </div>
 
-    <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
-        <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
-        <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
-        <input type="text" id="linkUrl" placeholder="Link URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
-        <button onclick="addCard()" class="bg-green-600 w-full p-2 rounded hover:bg-green-700">Add Card</button>
+    <!-- Admin Form -->
+    <div id="adminForm" class="hidden" style="text-align: center; padding: 20px;">
+        <input type="text" id="name" placeholder="Name" />
+        <input type="text" id="imgUrl" placeholder="Image URL" />
+        <input type="text" id="linkUrl" placeholder="Script Link" />
+        <button onclick="addCard()" class="button-glow" style="margin-left: 10px;">Add Leak</button>
     </div>
 
     <script type="module" src="script.js"></script>
