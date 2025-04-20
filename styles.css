@@ -1,92 +1,118 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #000000;
-    color: #ffffff;
-}
-
-/* Card Grid Layout */
-#content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-/* Card Styling */
+/* General card styling */
 .card {
     position: relative;
-    background-color: #1a0000;
+    background-color: #1f1f1f;
+    border: 2px solid red;
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-    border: 2px solid #ff0000;
-    transition: transform 0.3s ease;
     overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
-    .card:hover {
+    /* Image zoom on hover */
+    .card img {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
         transform: scale(1.05);
     }
 
-    /* Tracer Effect on Hover */
+    /* Tracer effect */
     .card::before {
-        content: '';
+        content: "";
         position: absolute;
         top: -2px;
         left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(90deg, #ff0000, #ff0040, #ff0000);
-        z-index: -1;
-        border-radius: inherit;
-        background-size: 200% 200%;
-        animation: tracer 2s linear infinite;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        border-radius: 1rem;
+        background: linear-gradient( 120deg, red, #ff5c33, #ff0000, #ff5c33, red );
+        background-size: 300% 300%;
+        z-index: 1;
+        animation: neonTracer 2s linear infinite;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        pointer-events: none;
     }
 
     .card:hover::before {
         opacity: 1;
     }
 
-/* Tracer Animation */
-@keyframes tracer {
+    /* Ensure card content is above tracer */
+    .card * {
+        position: relative;
+        z-index: 2;
+    }
+
+/* Tracer animation keyframes */
+@keyframes neonTracer {
     0% {
         background-position: 0% 50%;
     }
 
-    100% {
+    50% {
         background-position: 100% 50%;
     }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-/* Admin form input styling */
-#adminForm input {
-    background-color: #1a1a1a;
-    border: 1px solid #333;
-    color: #fff;
+/* Glitch effect for title */
+.glitch-title {
+    color: red;
+    position: relative;
+    display: inline-block;
 }
 
-    #adminForm input:focus {
-        border-color: #ff0000;
-        outline: none;
+    .glitch-title::before,
+    .glitch-title::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        color: #ff0000;
+        animation: glitch 2s infinite;
     }
 
-#adminForm button {
-    background-color: #ff0000;
-    color: white;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-}
-
-    #adminForm button:hover {
-        background-color: #cc0000;
+    .glitch-title::before {
+        top: -2px;
+        color: #ff1a1a;
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
     }
 
-/* Button transitions */
-button {
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-    button:hover {
-        transform: scale(1.05);
+    .glitch-title::after {
+        top: 2px;
+        color: #ff6666;
+        clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
     }
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
