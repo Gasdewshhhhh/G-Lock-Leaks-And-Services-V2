@@ -5,40 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>G-Lock Leaks & Services</title>
     <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 </head>
-<body>
+<body class="bg-black text-white relative overflow-hidden">
+
+    <!-- Particle Background -->
+    <div id="particles-js" class="absolute top-0 left-0 w-full h-full z-0"></div>
+
+    <!-- City Skyline -->
+    <div class="skyline z-0"></div>
 
     <!-- Hero Section -->
-    <section id="hero" style="text-align: center; padding: 80px 20px;">
-        <h1 class="glitch-title">G-Lock Leaks & Services</h1>
-        <div style="margin-top: 30px;">
-            <a href="#leaks" class="button-glow">Browse Leaks</a>
-            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="button-glow" style="margin-left: 15px;">Join Discord</a>
+    <section class="relative z-10 h-screen flex flex-col justify-center items-center space-y-6 text-center">
+        <h1 class="text-6xl glitch font-extrabold text-red-500">G-Lock Leaks & Services</h1>
+        <div class="flex space-x-4">
+            <a onclick="scrollToLeaks(); playClick();" class="neon-button">Browse Leaks</a>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" onclick="playClick();" class="neon-button-blue">Join Discord</a>
         </div>
     </section>
 
-    <!-- Spacer for long scroll effect -->
-    <div style="height: 600px;"></div>
-
     <!-- Leaks Section -->
-    <section id="leaks" style="padding: 40px;">
-        <div id="content" class="grid-container"></div>
+    <section id="leaks" class="pt-20 relative z-10">
+        <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6" id="content"></main>
     </section>
 
-    <!-- Admin Access Button (hidden as a single dot) -->
-    <div style="text-align: center; padding-bottom: 40px;">
-        <button onclick="promptAdmin()" style="background: none; border: none; color: #333;">.</button>
+    <!-- Hidden Admin Button & Form -->
+    <div class="fixed bottom-4 right-4 space-x-2 z-20">
+        <button onclick="promptAdmin(); playClick();" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
     </div>
 
-    <!-- Admin Form -->
-    <div id="adminForm" class="hidden" style="text-align: center; padding: 20px;">
-        <input type="text" id="name" placeholder="Name" />
-        <input type="text" id="imgUrl" placeholder="Image URL" />
-        <input type="text" id="linkUrl" placeholder="Script Link" />
-        <button onclick="addCard()" class="button-glow" style="margin-left: 10px;">Add Leak</button>
+    <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden z-20">
+        <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
+        <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
+        <input type="text" id="linkUrl" placeholder="Link URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
+        <button onclick="addCard(); playClick();" class="bg-green-600 w-full p-2 rounded hover:bg-green-700">Add Card</button>
     </div>
+
+    <!-- Sounds -->
+    <audio id="hoverSound" src="ui-hover.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="ui-click.mp3" preload="auto"></audio>
 
     <script type="module" src="script.js"></script>
+    <script>
+        // ParticleJS init
+        particlesJS.load('particles-js', 'particles.json', function () {
+            console.log('particles.json loaded');
+        });
+
+        // Sound effects
+        const hoverSound = document.getElementById('hoverSound');
+        const clickSound = document.getElementById('clickSound');
+
+        function playClick() {
+            clickSound.currentTime = 0;
+            clickSound.play();
+        }
+
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            });
+        });
+    </script>
 </body>
 </html>

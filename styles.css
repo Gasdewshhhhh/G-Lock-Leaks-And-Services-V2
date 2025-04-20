@@ -1,66 +1,93 @@
-/* Cyberpunk Colors */
-:root {
-    --neon-red: #ff003c;
-    --neon-pink: #ff6ec7;
-    --neon-blue: #00f0ff;
-    --neon-green: #39ff14;
-    --cyber-bg: #0d0d0d;
-}
-
 body {
-    background-color: var(--cyber-bg);
-    color: white;
+    background-color: #0a0a0a;
     font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    padding: 0;
 }
 
-/* Title */
-.glitch-title {
-    font-size: 4rem;
-    position: relative;
-    color: var(--neon-red);
-    animation: glowText 1.5s infinite alternate;
-    text-shadow: 0 0 8px var(--neon-red), 0 0 20px var(--neon-red), 0 0 40px var(--neon-pink);
+.city-skyline {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    background: url('https://i.imgur.com/oeG4zge.png') bottom repeat-x;
+    background-size: contain;
+    z-index: 1;
+    opacity: 0.4;
 }
 
-@keyframes glowText {
-    from {
-        text-shadow: 0 0 4px var(--neon-red), 0 0 10px var(--neon-red);
-    }
-
-    to {
-        text-shadow: 0 0 12px var(--neon-pink), 0 0 24px var(--neon-pink);
-    }
-}
-
-/* Buttons */
-.button-glow {
-    background: var(--neon-blue);
-    color: black;
-    border-radius: 8px;
+.cyber-button {
+    background-color: #ff003c;
+    border: 2px solid #ff003c;
+    color: white;
     padding: 12px 24px;
     font-weight: bold;
-    text-shadow: 0 0 3px white;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 10px var(--neon-blue);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
 }
 
-    .button-glow:hover {
-        background: black;
-        color: var(--neon-blue);
-        box-shadow: 0 0 15px var(--neon-blue), 0 0 30px var(--neon-blue);
+    .cyber-button:hover {
+        background-color: transparent;
+        color: #ff003c;
+        box-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c inset;
         text-decoration: underline;
     }
 
-/* Cards */
+.cyber-button-blue {
+    background-color: #00bfff;
+    border: 2px solid #00bfff;
+    color: white;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+    .cyber-button-blue:hover {
+        background-color: transparent;
+        color: #00bfff;
+        box-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff inset;
+        text-decoration: underline;
+    }
+
+.glitch-text {
+    color: #ff003c;
+    font-size: 4rem;
+    position: relative;
+    animation: glitch 1.5s infinite;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 2px 2px red;
+    }
+
+    20% {
+        text-shadow: -2px -2px blue;
+    }
+
+    40% {
+        text-shadow: 2px -2px green;
+    }
+
+    60% {
+        text-shadow: -2px 2px cyan;
+    }
+
+    80% {
+        text-shadow: 2px 2px magenta;
+    }
+
+    100% {
+        text-shadow: 0px 0px #ff003c;
+    }
+}
+
 .card {
     position: relative;
-    background-color: rgba(255, 0, 60, 0.1);
-    border: 2px solid var(--neon-red);
-    padding: 20px;
-    border-radius: 10px;
+    background-color: #1a1a1a;
+    border: 2px solid #ff003c;
+    border-radius: 1rem;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
     transition: transform 0.3s ease;
 }
 
@@ -73,30 +100,24 @@ body {
         position: absolute;
         top: -2px;
         left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(90deg, var(--neon-red), var(--neon-pink), var(--neon-red));
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        background: linear-gradient(90deg, red, orange, red);
+        background-size: 400% 400%;
         z-index: -1;
         animation: tracer 2s linear infinite;
-        border-radius: 12px;
     }
 
 @keyframes tracer {
     0% {
-        transform: translateX(-100%) translateY(0);
+        background-position: 0% 50%;
     }
 
     50% {
-        transform: translateX(100%) translateY(0);
+        background-position: 100% 50%;
     }
 
     100% {
-        transform: translateX(-100%) translateY(0);
+        background-position: 0% 50%;
     }
-}
-
-/* Neon underline for links */
-a:hover {
-    text-decoration: none;
-    border-bottom: 2px solid var(--neon-blue);
 }
