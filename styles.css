@@ -1,62 +1,76 @@
-.card-added {
-    animation: fadeIn 0.5s ease-out;
+/* Cyberpunk Neon Theme Colors */
+:root {
+    --neon-pink: #ff007b;
+    --neon-blue: #00aeff;
+    --neon-cyan: #00ffff;
+    --neon-purple: #9d00ff;
+    --neon-green: #39ff14;
+    --neon-yellow: #ffea00;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Neon Text Color Classes */
+.text-neon-pink {
+    color: var(--neon-pink);
 }
 
-.card:hover {
-    transform: scale(1.03);
-    transition: transform 0.2s ease-in-out;
+.bg-neon-blue {
+    background-color: var(--neon-blue);
 }
 
-.card img {
-    transition: transform 0.3s ease;
+.bg-neon-cyan {
+    background-color: var(--neon-cyan);
 }
 
-.card:hover img {
-    transform: scale(1.05);
+.bg-neon-pink {
+    background-color: var(--neon-pink);
 }
 
-/* Glowing animated border */
-@keyframes glowBorder {
+.bg-neon-purple {
+    background-color: var(--neon-purple);
+}
+
+.bg-neon-green {
+    background-color: var(--neon-green);
+}
+
+/* Neon Glow Animation */
+@keyframes neon-glow {
     0% {
-        box-shadow: 0 0 5px #ff0000;
+        box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
     }
 
     50% {
-        box-shadow: 0 0 15px #ff0000, 0 0 25px #ff0000;
+        box-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 30px var(--neon-pink);
     }
 
     100% {
-        box-shadow: 0 0 5px #ff0000;
+        box-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
     }
 }
 
-.animate-glow {
-    animation: glowBorder 2s infinite ease-in-out;
+/* Card Styling */
+.card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--neon-pink);
+    border-radius: 1rem;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Admin form styling */
-#adminForm {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-}
-
-    #adminForm input {
-        border: 1px solid #7f1d1d;
-        transition: border-color 0.3s;
+    .card:hover {
+        transform: scale(1.05);
+        animation: neon-glow 1.5s infinite alternate;
     }
 
-        #adminForm input:focus {
-            outline: none;
-            border-color: #ef4444;
+        /* Optional: Add a glowing border animation on hover */
+        .card:hover::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px var(--neon-pink);
+            z-index: -1;
         }

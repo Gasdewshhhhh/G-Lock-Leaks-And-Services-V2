@@ -27,42 +27,6 @@ window.addCard = async function () {
     if (!name || !imgUrl || !linkUrl) {
         alert("Please fill in all fields.");
         return;
-    }
 
-    const { error } = await supabase.from('leaks').insert([{ name, image_url: imgUrl, link_url: linkUrl }]);
-    if (error) {
-        console.error(error);
-        alert("Error adding card.");
-        return;
-    }
+:: contentReference[oaicite: 4]{ index = 4 }
 
-    document.getElementById("adminForm").classList.add("hidden");
-    renderCard({ name, image_url: imgUrl, link_url: linkUrl });
-};
-
-function renderCard(leak) {
-    const card = document.createElement("div");
-    card.className = "card bg-red-900 p-4 rounded-xl shadow-lg card-added transition-transform transform hover:scale-105 border-2 border-red-500 animate-glow";
-    card.innerHTML = `
-        <h2 class="text-xl font-semibold text-white mb-2">${leak.name}</h2>
-        <img src="${leak.image_url}" alt="${leak.name}" class="rounded-lg mb-4 w-full h-48 object-cover" />
-        <a href="${leak.link_url}" target="_blank" class="block text-center text-red-500 hover:underline">Visit Script</a>
-    `;
-    document.getElementById("content").appendChild(card);
-}
-
-async function loadCards() {
-    const { data: leaks, error } = await supabase.from('leaks').select('*');
-    if (error) {
-        console.error("Error loading leaks:", error);
-        return;
-    }
-    leaks.forEach(renderCard);
-}
-
-function scrollToLeaks() {
-    document.getElementById('leaks').scrollIntoView({ behavior: 'smooth' });
-}
-window.scrollToLeaks = scrollToLeaks;
-
-loadCards();
