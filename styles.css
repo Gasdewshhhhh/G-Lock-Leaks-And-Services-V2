@@ -1,133 +1,184 @@
 
 /* Base styles */
+/* Base Styles */
 body {
-  margin: 0;
-  font-family: 'Orbitron', sans-serif;
-  background-color: #0d0d0d;
-  color: #fff;
-  position: relative;
-  overflow-x: hidden;
+    font-family: 'Orbitron', sans-serif;
+    background: #000;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3rem;
-  text-align: center;
-  margin-top: 50px;
-  color: #ff0057;
-  position: relative;
-  animation: glitch 2s infinite;
+/* Glitch Title */
+.glitch-title {
+    position: relative;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #ff004d;
+    text-transform: uppercase;
+    animation: glitch 1s infinite;
 }
+
+    .glitch-title::before,
+    .glitch-title::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: #ff004d;
+        background: black;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    .glitch-title::before {
+        animation: glitchTop 1s infinite linear;
+        color: #0ff;
+    }
+
+    .glitch-title::after {
+        animation: glitchBottom 1s infinite linear;
+        color: #f0f;
+    }
 
 @keyframes glitch {
-  0% {
-    text-shadow: 2px 0 red, -2px 0 blue;
-  }
-  20% {
-    text-shadow: -2px 0 red, 2px 0 blue;
-  }
-  40% {
-    text-shadow: 2px 0 red, -2px 0 blue;
-  }
-  60% {
-    text-shadow: -2px 0 red, 2px 0 blue;
-  }
-  80% {
-    text-shadow: 2px 0 red, -2px 0 blue;
-  }
-  100% {
-    text-shadow: -2px 0 red, 2px 0 blue;
-  }
+    0% {
+        transform: none;
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-1px, -1px);
+    }
+
+    60% {
+        transform: translate(2px, 1px);
+    }
+
+    80% {
+        transform: translate(-1px, -2px);
+    }
+
+    100% {
+        transform: none;
+    }
 }
 
-/* Buttons */
-button, .btn {
-  font-size: 1.1rem;
-  margin: 10px;
-  padding: 12px 24px;
-  background: transparent;
-  color: #ff0057;
-  border: 2px solid #ff0057;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+@keyframes glitchTop {
+    0% {
+        clip: rect(0, 9999px, 0, 0);
+    }
+
+    10% {
+        clip: rect(0, 9999px, 5px, 0);
+    }
+
+    20% {
+        clip: rect(0, 9999px, 10px, 0);
+    }
+
+    30% {
+        clip: rect(0, 9999px, 5px, 0);
+    }
+
+    100% {
+        clip: rect(0, 9999px, 0, 0);
+    }
 }
 
-button:hover, .btn:hover {
-  background-color: #ff0057;
-  color: #000;
-  text-shadow: 0 0 5px #fff;
-  box-shadow: 0 0 15px #ff0057, 0 0 30px #ff0057;
+@keyframes glitchBottom {
+    0% {
+        clip: rect(0, 9999px, 0, 0);
+    }
+
+    10% {
+        clip: rect(5px, 9999px, 10px, 0);
+    }
+
+    20% {
+        clip: rect(10px, 9999px, 15px, 0);
+    }
+
+    30% {
+        clip: rect(5px, 9999px, 10px, 0);
+    }
+
+    100% {
+        clip: rect(0, 9999px, 0, 0);
+    }
 }
 
-/* Leak cards */
-#content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 40px;
-  margin-bottom: 100px;
+/* Neon Buttons */
+a.bg-red-600,
+a.bg-blue-600 {
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
+    a.bg-red-600:hover {
+        box-shadow: 0 0 15px #ff004d, 0 0 30px #ff004d;
+    }
+
+    a.bg-blue-600:hover {
+        box-shadow: 0 0 15px #00bfff, 0 0 30px #00bfff;
+    }
+
+a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Card Tracer */
 .card {
-  background: #1a1a1a;
-  border: 2px solid #ff1a4b;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.3s ease-in-out;
+    border: 2px solid #ff0033;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.card:hover {
-  transform: scale(1.05);
-}
+    .card::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(90deg, transparent, red, transparent);
+        animation: tracer 2s linear infinite;
+        z-index: 1;
+        pointer-events: none;
+    }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  border: 2px solid transparent;
-  animation: tracer 1.5s linear infinite;
-  pointer-events: none;
-}
+    .card:hover::before {
+        background: linear-gradient(270deg, transparent, red, transparent);
+    }
 
 @keyframes tracer {
-  0% {
-    left: -100%;
-    border-top: 2px solid #ff1a4b;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-  }
-  25% {
-    left: 0%;
-    border-top: none;
-    border-right: 2px solid #ff1a4b;
-  }
-  50% {
-    top: 100%;
-    border-right: none;
-    border-bottom: 2px solid #ff1a4b;
-  }
-  75% {
-    left: -100%;
-    border-bottom: none;
-    border-left: 2px solid #ff1a4b;
-  }
-  100% {
-    border-left: none;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 /* City Skyline */
-.city-skyline {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 150px;
-  background: url('https://i.imgur.com/sU0U6kz.png') repeat-x bottom;
-  background-size: cover;
-  z-index: -1;
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: url('https://i.imgur.com/WC2bAjP.png') repeat-x bottom;
+    background-size: cover;
+    z-index: 0;
+    pointer-events: none;
 }
