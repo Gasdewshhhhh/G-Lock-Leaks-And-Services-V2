@@ -4,120 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>G-Lock Leaks & Services</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <style>
-        html, body {
-            scroll-behavior: smooth;
-        }
-
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet" />
 </head>
-<body class="bg-black text-white min-h-screen p-6">
-
-    <!-- Particle Canvas -->
+<body>
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Hero Section -->
-    <section id="hero" style="text-align: center; padding: 80px 20px;">
-        <h1 class="glitch-title">G-Lock Leaks & Services</h1>
-        <div style="margin-top: 30px;">
-            <a href="#leaks" class="button-glow">Browse Leaks</a>
-            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="button-glow" style="margin-left: 15px;">Join Discord</a>
+    <section class="hero-section">
+        <h1 class="glitch-title horror-glow">G-Lock Leaks & Services</h1>
+        <div class="hero-buttons">
+            <button onclick="scrollToLeaks()" class="browse-button">Browse Leaks</button>
+            <a href="https://discord.gg/yourserver" target="_blank" class="discord-button">Join Discord</a>
         </div>
     </section>
 
-    <!-- Leaks Section -->
-    <section id="leaks" class="pt-12">
-        <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="content"></main>
-    </section>
+    <div class="dot-admin" onclick="showAdmin()">.</div>
 
-    <!-- Hidden Admin Button & Form -->
-    <div class="fixed bottom-4 right-4 space-x-2">
-        <button onclick="promptAdmin()" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
+    <section id="leaks-container" class="leaks-grid"></section>
+
+    <div id="admin-form" class="admin-panel">
+        <input type="password" id="admin-password" placeholder="Enter Password" />
+        <input type="text" id="leak-name" placeholder="Leak Name" />
+        <input type="text" id="image-url" placeholder="Image URL" />
+        <input type="text" id="leak-link" placeholder="Script Link" />
+        <button onclick="submitLeak()">Add Leak</button>
     </div>
 
-    <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
-        <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
-        <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
-        <input type="text" id="linkUrl" placeholder="Link URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
-        <button onclick="addCard()" class="bg-green-600 w-full p-2 rounded hover:bg-green-700">Add Card</button>
-    </div>
-
-    <script type="module" src="script.js"></script>
-    <script>
-    // Particle Canvas Logic
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let particles = [];
-    const particleCount = 100;
-    let mouse = { x: null, y: null };
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    window.addEventListener('mousemove', function(event) {
-      mouse.x = event.clientX;
-      mouse.y = event.clientY;
-    });
-
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.radius = Math.random() * 2 + 1;
-      this.color = 'rgba(0, 183, 255, 0.8)';
-      this.speed = Math.random() * 1 + 0.5;
-      this.angle = Math.random() * 2 * Math.PI;
-
-      this.update = function() {
-        this.x += Math.cos(this.angle) * this.speed;
-        this.y += Math.sin(this.angle) * this.speed;
-
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
-      };
-
-      this.draw = function() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      };
-    }
-
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-    }
-    initParticles();
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

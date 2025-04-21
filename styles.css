@@ -1,107 +1,118 @@
-/* === Glitch Title === */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Arial', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+}
+
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
 .glitch-title {
+    font-family: 'Creepster', cursive;
     font-size: 4rem;
-    font-weight: bold;
-    color: #ff3c3c;
-    position: relative;
-    display: inline-block;
-    text-transform: uppercase;
-    animation: glitch 2s infinite;
+    color: red;
+    text-align: center;
 }
 
-@keyframes glitch {
+.horror-glow {
+    animation: redGlowPulse 2s infinite;
+}
+
+@keyframes redGlowPulse {
     0% {
-        text-shadow: 2px 2px #00ffe0, -2px -2px #ff3c3c;
+        text-shadow: 0 0 10px red, 0 0 20px red;
     }
 
-    20% {
-        text-shadow: -2px 2px #ff3c3c, 2px -2px #00ffe0;
-    }
-
-    40% {
-        text-shadow: 2px -2px #00ffe0, -2px 2px #ff3c3c;
-    }
-
-    60% {
-        text-shadow: -2px -2px #ff3c3c, 2px 2px #00ffe0;
-    }
-
-    80% {
-        text-shadow: 2px 2px #ff3c3c, -2px -2px #00ffe0;
+    50% {
+        text-shadow: none;
     }
 
     100% {
-        text-shadow: -2px 2px #00ffe0, 2px -2px #ff3c3c;
+        text-shadow: 0 0 10px red, 0 0 20px red;
     }
 }
 
-/* === Glow Buttons === */
-.button-glow {
-    background: black;
-    color: #ff3c3c;
-    padding: 0.75rem 1.5rem;
-    border: 2px solid #ff3c3c;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    font-weight: bold;
+.browse-button, .discord-button {
+    background-color: transparent;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .browse-button:hover, .discord-button:hover {
+        background-color: #00ffff;
+        color: #000;
+    }
+
+.dot-admin {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: red;
+    cursor: pointer;
+}
+
+.admin-panel {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    border: 1px solid red;
+    z-index: 999;
+}
+
+    .admin-panel input, .admin-panel button {
+        margin: 5px 0;
+        padding: 8px;
+        font-size: 1rem;
+    }
+
+.leaks-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.leak-card {
+    background-color: #111;
+    border: 2px solid red;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    transition: 0.3s;
     position: relative;
-    overflow: hidden;
 }
 
-    .button-glow::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 60, 60, 0.5), transparent);
-        transition: left 0.3s;
+    .leak-card:hover {
+        box-shadow: 0 0 20px red;
     }
 
-    .button-glow:hover::after {
-        left: 100%;
+    .leak-card img {
+        max-width: 100%;
+        height: auto;
     }
-
-    .button-glow:hover {
-        box-shadow: 0 0 12px #ff3c3c, 0 0 24px #ff3c3c;
-        text-decoration: underline;
-    }
-
-/* === Card Glow with Tracer on Hover === */
-.card {
-    position: relative;
-    border: 2px solid #ff3c3c;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-    .card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border: 2px solid transparent;
-        border-radius: 8px;
-        z-index: 1;
-        background: conic-gradient(from 0deg, #ff3c3c, transparent 30%, #ff3c3c 60%, transparent 90%, #ff3c3c);
-        animation: tracer 2s linear infinite;
-        pointer-events: none;
-        mask: linear-gradient(#0000, #000 25%, #000 75%, #0000);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .card:hover::before {
-        opacity: 1;
-    }
-
-@keyframes tracer {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
