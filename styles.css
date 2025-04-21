@@ -1,108 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Creepster', cursive;
-    margin: 0;
-    padding: 0;
-}
-
-.button-glow {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #ff0000;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-    .button-glow:hover {
-        box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
-    }
-
-.card {
-    background-color: #111;
-    border: 2px solid red;
-    border-radius: 12px;
-    overflow: hidden;
+/* Glitch Title Effect */
+.glitch-title {
     position: relative;
-    transition: transform 0.3s ease;
-    padding: 16px;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    font-size: 3rem;
+    color: #ff1e56;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-    .card:hover {
-        transform: scale(1.03);
-        animation: tracer-glow 1.2s linear infinite;
-    }
-
-    .card img {
+    .glitch-title::before,
+    .glitch-title::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
         width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 6px;
-        margin-bottom: 10px;
+        color: #ff1e56;
+        overflow: hidden;
+        clip: rect(0, 900px, 0, 0);
     }
 
-    .card h2 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-        color: #fff;
-        text-shadow: 0 0 5px #ff0000;
+    .glitch-title::before {
+        color: #ff005a;
+        animation: glitchTop 2s infinite linear alternate-reverse;
     }
 
-    .card a {
-        display: inline-block;
-        margin-top: 8px;
-        color: #ff4c4c;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.2s;
+    .glitch-title::after {
+        color: #ff80aa;
+        animation: glitchBottom 2s infinite linear alternate-reverse;
     }
 
-        .card a:hover {
-            color: #ff1a1a;
-            text-decoration: underline;
-        }
-
-@keyframes tracer-glow {
+@keyframes glitchTop {
     0% {
-        box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
-    }
-
-    50% {
-        box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+        clip: rect(0, 9999px, 0, 0);
+        transform: translate(-2px, -2px);
     }
 
     100% {
-        box-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
+        clip: rect(0, 9999px, 30px, 0);
+        transform: translate(2px, 2px);
     }
 }
 
-.glitch-title {
-    font-family: 'Creepster', cursive;
-    font-size: 3rem;
-    color: #fff;
-    text-align: center;
-    animation: glow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+@keyframes glitchBottom {
+    0% {
+        clip: rect(10px, 9999px, 40px, 0);
+        transform: translate(2px, -2px);
     }
 
-    to {
-        text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+    100% {
+        clip: rect(5px, 9999px, 60px, 0);
+        transform: translate(-2px, 2px);
     }
 }
 
-/* Layout for the leak cards grid */
-#content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    padding: 20px;
+/* Card Tracer Border */
+.card {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ff1e56;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 2px solid transparent;
+        border-radius: inherit;
+        animation: tracer 1.5s linear infinite;
+        pointer-events: none;
+    }
+
+    .card:hover::before {
+        border-color: #ff1e56;
+        box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
+    }
+
+@keyframes tracer {
+    0% {
+        transform: scaleX(0) scaleY(1);
+        transform-origin: left;
+    }
+
+    25% {
+        transform: scaleX(1) scaleY(1);
+        transform-origin: left;
+    }
+
+    50% {
+        transform: scaleX(1) scaleY(0);
+        transform-origin: top;
+    }
+
+    75% {
+        transform: scaleX(1) scaleY(1);
+        transform-origin: right;
+    }
+
+    100% {
+        transform: scaleX(0) scaleY(1);
+        transform-origin: bottom;
+    }
 }

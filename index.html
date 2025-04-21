@@ -10,49 +10,16 @@
         html, body {
             scroll-behavior: smooth;
         }
-
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-
-        .glitch-title {
-            font-family: 'Creepster', cursive;
-            font-size: 3rem;
-            color: #fff;
-            text-align: center;
-            animation: glow 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
-            }
-
-            to {
-                text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
-            }
-        }
     </style>
 </head>
 <body class="bg-black text-white min-h-screen p-6">
 
-    <!-- Particle Canvas -->
-    <canvas id="particle-canvas"></canvas>
-
     <!-- Hero Section -->
-    <section id="hero" style="text-align: center; padding: 80px 20px;">
-        <h1 class="glitch-title">G-Lock Leaks & Services</h1>
-        <div style="margin-top: 30px;">
-            <a href="#leaks" class="button-glow">Browse Leaks</a>
-            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="button-glow" style="margin-left: 15px;">Join Discord</a>
+    <section class="h-screen flex flex-col justify-center items-center space-y-4">
+        <h1 class="glitch-title" data-text="G-Lock Leaks & Services">G-Lock Leaks & Services</h1>
+        <div class="flex space-x-4">
+            <a href="#leaks" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 text-lg font-semibold rounded-xl">Browse Leaks</a>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-xl">Join Discord</a>
         </div>
     </section>
 
