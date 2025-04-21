@@ -55,13 +55,13 @@
     font-weight: bold;
     border-radius: 0.5rem;
     text-decoration: none;
-    box-shadow: 0 0 8px #ff1e56;
+    box-shadow: 0 0 8px #ff0000;
     transition: all 0.3s ease;
 }
 
     .button-glow:hover {
         background: #ff005a;
-        box-shadow: 0 0 12px #ff1e56, 0 0 20px #ff1e56;
+        box-shadow: 0 0 12px #ff0000, 0 0 20px #ff0000;
     }
 
 /* Card Hover Red Tracer */
@@ -69,11 +69,11 @@
     position: relative;
     overflow: hidden;
     border-radius: 0.5rem;
-    background-color: #a31818;
+    background-color: #800404;
     padding: 1rem;
     transition: transform 0.3s ease;
     z-index: 0;
-    border: 2px solid #1ec7ff;
+    border: 2px solid #800404;
 }
 
     .card::before {
@@ -87,9 +87,9 @@
     }
 
     .card:hover::before {
-        border-color: #ff1e56;
+        border-color: #800404;
         animation: border-trace 1.2s linear forwards;
-        box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
+        box-shadow: 0 0 10px #800404, 0 0 20px #800404;
     }
 
 @keyframes border-trace {
