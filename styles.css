@@ -1,177 +1,107 @@
-/* Title Glitch */
+/* === Glitch Title === */
 .glitch-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3rem;
-    position: relative;
-    color: #ff1e56;
+    font-size: 4rem;
     font-weight: bold;
+    color: #ff3c3c;
+    position: relative;
+    display: inline-block;
     text-transform: uppercase;
+    animation: glitch 2s infinite;
 }
-
-    .glitch-title::before,
-    .glitch-title::after {
-        content: attr(data-text);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        color: #ff1e56;
-        overflow: hidden;
-        z-index: -1;
-    }
-
-    .glitch-title::before {
-        left: 2px;
-        text-shadow: -2px 0 red;
-        animation: glitch 1s infinite linear alternate-reverse;
-    }
-
-    .glitch-title::after {
-        left: -2px;
-        text-shadow: -2px 0 blue;
-        animation: glitch 1s infinite linear alternate-reverse;
-    }
 
 @keyframes glitch {
     0% {
-        clip: rect(0, 9999px, 0, 0);
+        text-shadow: 2px 2px #00ffe0, -2px -2px #ff3c3c;
     }
 
-    5% {
-        clip: rect(0, 9999px, 100%, 0);
+    20% {
+        text-shadow: -2px 2px #ff3c3c, 2px -2px #00ffe0;
+    }
+
+    40% {
+        text-shadow: 2px -2px #00ffe0, -2px 2px #ff3c3c;
+    }
+
+    60% {
+        text-shadow: -2px -2px #ff3c3c, 2px 2px #00ffe0;
+    }
+
+    80% {
+        text-shadow: 2px 2px #ff3c3c, -2px -2px #00ffe0;
     }
 
     100% {
-        clip: rect(0, 9999px, 0, 0);
+        text-shadow: -2px 2px #00ffe0, 2px -2px #ff3c3c;
     }
 }
 
-/* Neon Buttons */
+/* === Glow Buttons === */
 .button-glow {
-    display: inline-block;
+    background: black;
+    color: #ff3c3c;
     padding: 0.75rem 1.5rem;
-    background: #ff1e56;
-    color: white;
+    border: 2px solid #ff3c3c;
+    border-radius: 8px;
+    transition: all 0.3s ease;
     font-weight: bold;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    box-shadow: 0 0 8px #ff0000;
+    position: relative;
+    overflow: hidden;
+}
+
+    .button-glow::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 60, 60, 0.5), transparent);
+        transition: left 0.3s;
+    }
+
+    .button-glow:hover::after {
+        left: 100%;
+    }
+
+    .button-glow:hover {
+        box-shadow: 0 0 12px #ff3c3c, 0 0 24px #ff3c3c;
+        text-decoration: underline;
+    }
+
+/* === Card Glow with Tracer on Hover === */
+.card {
+    position: relative;
+    border: 2px solid #ff3c3c;
+    border-radius: 8px;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
-    .button-glow:hover {
-        background: #ff005a;
-        box-shadow: 0 0 12px #ff0000, 0 0 20px #ff0000;
-    }
-
-/* Card Hover Red Tracer */
-.card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 0.5rem;
-    background-color: #800404;
-    padding: 1rem;
-    transition: transform 0.3s ease;
-    z-index: 0;
-    border: 2px solid #800404;
-}
-
     .card::before {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         border: 2px solid transparent;
+        border-radius: 8px;
+        z-index: 1;
+        background: conic-gradient(from 0deg, #ff3c3c, transparent 30%, #ff3c3c 60%, transparent 90%, #ff3c3c);
+        animation: tracer 2s linear infinite;
         pointer-events: none;
-        z-index: 2;
-        transition: border 0.3s ease, box-shadow 0.3s ease;
+        mask: linear-gradient(#0000, #000 25%, #000 75%, #0000);
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 
     .card:hover::before {
-        border-color: #800404;
-        animation: border-trace 1.2s linear forwards;
-        box-shadow: 0 0 10px #800404, 0 0 20px #800404;
+        opacity: 1;
     }
 
-@keyframes border-trace {
+@keyframes tracer {
     0% {
-        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-    }
-
-    25% {
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    }
-
-    50% {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
-    }
-
-    75% {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: rotate(0deg);
     }
 
     100% {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transform: rotate(360deg);
     }
 }
-/* Particle Background Canvas */
-#particle-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Behind everything */
-    pointer-events: none;
-}
-
-/* Inside-card elements */
-.card h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 0.5rem;
-}
-
-.card img {
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    width: 100%;
-    height: 12rem;
-    object-fit: cover;
-}
-
-.card a {
-    display: block;
-    text-align: center;
-    color: #ff1e56;
-    transition: color 0.3s ease;
-}
-
-    .card a:hover {
-        color: #ff4a7d;
-    }
-
-/* Optional Glowing Underline for Links */
-.glow-link {
-    position: relative;
-    color: #ff1e56;
-    text-decoration: none;
-}
-
-    .glow-link::after {
-        content: "";
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: #ff1e56;
-        box-shadow: 0 0 6px #ff1e56;
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s ease;
-    }
-
-    .glow-link:hover::after {
-        transform: scaleX(1);
-    }
