@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Creepster', cursive;
+}
+
 /* Glitch Title Effect */
 .glitch-title {
     position: relative;
@@ -53,52 +61,29 @@
     }
 }
 
-/* Card Tracer Border */
+/* Card Styling (NO animations, NO hover effects) */
 .card {
-    position: relative;
-    overflow: hidden;
+    background-color: #111;
     border: 2px solid #ff1e56;
-    transition: transform 0.3s ease-in-out;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-    .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border: 2px solid transparent;
-        border-radius: inherit;
-        animation: tracer 1.5s linear infinite;
-        pointer-events: none;
+    .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
     }
 
-    .card:hover::before {
-        border-color: #ff1e56;
-        box-shadow: 0 0 10px #ff1e56, 0 0 20px #ff1e56;
-    }
-
-@keyframes tracer {
-    0% {
-        transform: scaleX(0) scaleY(1);
-        transform-origin: left;
-    }
-
-    25% {
-        transform: scaleX(1) scaleY(1);
-        transform-origin: left;
-    }
-
-    50% {
-        transform: scaleX(1) scaleY(0);
-        transform-origin: top;
-    }
-
-    75% {
-        transform: scaleX(1) scaleY(1);
-        transform-origin: right;
-    }
-
-    100% {
-        transform: scaleX(0) scaleY(1);
-        transform-origin: bottom;
-    }
+/* Buttons */
+.button-glow {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #ff0000;
+    border-radius: 5px;
+    text-decoration: none;
 }
