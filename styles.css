@@ -1,9 +1,10 @@
+/* Reset and base styling */
 body, html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
     font-family: 'Arial', sans-serif;
-    background: #0a0a0a;
+    background-color: #0a0a0a;
     color: #fff;
 }
 
@@ -14,6 +15,7 @@ body, html {
     z-index: -1;
 }
 
+/* Hero section */
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -26,14 +28,12 @@ body, html {
 .glitch-title {
     font-family: 'Creepster', cursive;
     font-size: 4rem;
-    color: red;
     text-align: center;
-}
-
-.horror-glow {
+    color: red;
     animation: redGlowPulse 2s infinite;
 }
 
+/* Glow animation */
 @keyframes redGlowPulse {
     0% {
         text-shadow: 0 0 10px red, 0 0 20px red;
@@ -48,15 +48,23 @@ body, html {
     }
 }
 
+/* Buttons */
+.hero-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 20px;
+}
+
 .browse-button, .discord-button {
-    background-color: transparent;
+    background: transparent;
     border: 2px solid #00ffff;
     color: #00ffff;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 1.2rem;
+    padding: 10px 25px;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    border-radius: 5px;
 }
 
     .browse-button:hover, .discord-button:hover {
@@ -64,55 +72,83 @@ body, html {
         color: #000;
     }
 
+/* Admin button (dot) */
 .dot-admin {
     position: fixed;
     bottom: 10px;
     right: 10px;
     color: red;
     cursor: pointer;
+    font-size: 24px;
 }
 
+/* Admin panel */
 .admin-panel {
     display: none;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 15px;
     position: fixed;
-    bottom: 50px;
+    bottom: 60px;
     right: 10px;
-    border: 1px solid red;
-    z-index: 999;
+    border: 2px solid red;
+    z-index: 1000;
 }
 
-    .admin-panel input, .admin-panel button {
+    .admin-panel input,
+    .admin-panel button {
         margin: 5px 0;
         padding: 8px;
         font-size: 1rem;
     }
 
+/* Leak grid and cards */
 .leaks-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
+    gap: 30px;
     padding: 40px 20px;
+    margin-bottom: 100px;
 }
 
 .leak-card {
+    width: 300px;
     background-color: #111;
     border: 2px solid red;
-    width: 300px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 15px;
     text-align: center;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     position: relative;
+    box-shadow: 0 0 10px transparent;
 }
 
     .leak-card:hover {
-        box-shadow: 0 0 20px red;
+        box-shadow: 0 0 20px red, 0 0 40px red;
+    }
+
+    .leak-card h3 {
+        color: #ff4d4d;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
     }
 
     .leak-card img {
-        max-width: 100%;
+        width: 100%;
         height: auto;
+        border-radius: 5px;
+        margin-bottom: 10px;
     }
+
+    .leak-card a {
+        color: #00ffff;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 5px;
+    }
+
+        .leak-card a:hover {
+            text-decoration: underline;
+        }
