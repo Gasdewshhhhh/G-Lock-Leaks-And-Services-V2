@@ -4,32 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>G-Lock Leaks & Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet" />
+    <style>
+        html, body {
+            scroll-behavior: smooth;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-black text-white min-h-screen p-6">
+    <!-- Particle Canvas -->
     <canvas id="particle-canvas"></canvas>
 
-    <section class="hero-section">
-        <h1 class="glitch-title horror-glow">G-Lock Leaks & Services</h1>
-        <div class="hero-buttons">
-            <button onclick="scrollToLeaks()" class="browse-button">Browse Leaks</button>
-            <a href="https://discord.gg/yourserver" target="_blank" class="discord-button">Join Discord</a>
+    <!-- Hero Section -->
+    <section id="hero" style="text-align: center; padding: 80px 20px;">
+        <h1 class="glitch-title">G-Lock Leaks & Services</h1>
+        <div style="margin-top: 30px;">
+            <a href="#leaks" class="button-glow">Browse Leaks</a>
+            <a href="https://discord.gg/WFyPgwXTZx" target="_blank" class="button-glow" style="margin-left: 15px;">Join Discord</a>
         </div>
     </section>
 
-    <div class="dot-admin" onclick="showAdmin()">.</div>
+    <!-- Leaks Section -->
+    <section id="leaks" class="pt-12">
+        <main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="content"></main>
+    </section>
 
-    <section id="leaks-container" class="leaks-grid"></section>
-
-    <div id="admin-form" class="admin-panel">
-        <input type="password" id="admin-password" placeholder="Enter Password" />
-        <input type="text" id="leak-name" placeholder="Leak Name" />
-        <input type="text" id="image-url" placeholder="Image URL" />
-        <input type="text" id="leak-link" placeholder="Script Link" />
-        <button onclick="submitLeak()">Add Leak</button>
+    <!-- Hidden Admin Button & Form -->
+    <div class="fixed bottom-4 right-4 space-x-2">
+        <button onclick="promptAdmin()" class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800 transition">.</button>
     </div>
 
-    <script src="script.js"></script>
+    <div id="adminForm" class="fixed bottom-24 right-4 bg-gray-900 p-4 rounded-xl shadow-xl hidden">
+        <input type="text" id="name" placeholder="Leak Name" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
+        <input type="text" id="imgUrl" placeholder="Image URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
+        <input type="text" id="linkUrl" placeholder="Link URL" class="w-full mb-2 p-2 rounded bg-gray-700 text-white">
+        <button onclick="addCard()" class="bg-green-600 w-full p-2 rounded hover:bg-green-700">Add Card</button>
+    </div>
+
+    <script type="module" src="script.js"></script>
 </body>
 </html>

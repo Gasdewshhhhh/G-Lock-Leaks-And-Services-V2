@@ -1,69 +1,60 @@
-﻿// ✅ SUPABASE CONFIG FIRST
-const SUPABASE_URL = 'https://iddpdcgekjcwqzhauguz.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw'; // replace with your actual key
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+﻿import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-// ✅ DOM references
-const leaksGrid = document.querySelector('.leaks-grid');
-const adminDot = document.querySelector('.dot-admin');
-const adminPanel = document.querySelector('.admin-panel');
-const passwordPrompt = 'GasOnly';
-const scrollBtn = document.querySelector('.browse-button');
+const supabaseUrl = 'https://iddpdcgekjcwqzhauguz.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZHBkY2dla2pjd3F6aGF1Z3V6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNDQ5NjEsImV4cCI6MjA2MDYyMDk2MX0.rO5Dm0PV_Awuww_nUtvQBFgjQb4L-pry7KWmzqKSjnw';
+const supabase = createClient(supabaseUrl, supabaseKey);
+window.supabase = supabase;
 
-// ✅ Scroll to leaks
-scrollBtn.addEventListener('click', () => {
-    document.querySelector('.leaks-grid').scrollIntoView({ behavior: 'smooth' });
-});
+const password = "GasOnly";
 
-// ✅ Show/hide admin panel with password
-adminDot.addEventListener('click', () => {
-    const pass = prompt('Enter password:');
-    if (pass === passwordPrompt) {
-        adminPanel.style.display = adminPanel.style.display === 'flex' ? 'none' : 'flex';
+window.promptAdmin = function () {
+    const input = prompt("Enter admin password:");
+    if (input === password) {
+        document.getElementById('adminForm').classList.remove("hidden");
     } else {
-        alert('Incorrect password');
+        alert("Incorrect password.");
     }
-});
+};
 
-// ✅ Add leak
-document.getElementById('addLeak').addEventListener('click', async () => {
-    const name = document.getElementById('leakName').value;
-    const imageUrl = document.getElementById('leakImage').value;
-    const link = document.getElementById('leakLink').value;
+window.addCard = async function () {
+    const name = document.getElementById("name").value;
+    const imgUrl = document.getElementById("imgUrl").value;
+    const linkUrl = document.getElementById("linkUrl").value;
 
-    if (!name || !imageUrl || !link) return alert('Please fill in all fields');
-
-    const { error } = await supabase.from('leaks').insert([{ name, image_url: imageUrl, link }]);
-    if (error) {
-        alert('Failed to add leak');
-        console.error(error);
-    } else {
-        loadLeaks();
-    }
-});
-
-// ✅ Load leaks from Supabase
-async function loadLeaks() {
-    const { data, error } = await supabase.from('leaks').select('*').order('id', { ascending: false });
-    if (error) {
-        console.error('Error fetching leaks:', error);
+    if (!name || !imgUrl || !linkUrl) {
+        alert("Please fill in all fields.");
         return;
     }
 
-    leaksGrid.innerHTML = '';
-    data.forEach(leak => {
-        const card = document.createElement('div');
-        card.className = 'leak-card';
+    const { error } = await supabase.from('leaks').insert([{ name, image_url: imgUrl, link_url: linkUrl }]);
+    if (error) {
+        alert("Error adding card.");
+        return;
+    }
 
-        card.innerHTML = `
-      <h3>${leak.name}</h3>
-      <img src="${leak.image_url}" alt="${leak.name}">
-      <a href="${leak.link}" target="_blank">Visit Script</a>
+    document.getElementById("adminForm").classList.add("hidden");
+    renderCard({ name, image_url: imgUrl, link_url: linkUrl });
+};
+
+function renderCard(leak) {
+    const card = document.createElement("div");
+    card.className = "card bg-red-900 p-4 shadow-lg";
+    card.innerHTML = `
+        <h2 class="text-xl font-semibold text-white mb-2">${leak.name}</h2>
+        <img src="${leak.image_url}" alt="${leak.name}" class="rounded-lg mb-4 w-full h-48 object-cover" />
+        <a href="${leak.link_url}" target="_blank" class="block text-center text-red-400 hover:text-red-300">Visit Script</a>
     `;
-
-        leaksGrid.appendChild(card);
-    });
+    document.getElementById("content").appendChild(card);
 }
 
-// ✅ Initial load
-loadLeaks();
+async function loadCards() {
+    const { data: leaks } = await supabase.from('leaks').select('*');
+    leaks.forEach(renderCard);
+}
+
+function scrollToLeaks() {
+    document.getElementById('leaks').scrollIntoView({ behavior: 'smooth' });
+}
+window.scrollToLeaks = scrollToLeaks;
+
+loadCards();
